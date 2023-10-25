@@ -20,7 +20,8 @@ public class Producto{
     @JoinTable(
             name = "usuarioVentaProducto",
             joinColumns = @JoinColumn(name = "producto_id"),
-            inverseJoinColumns = @JoinColumn(name = "usuario_id"))
+            inverseJoinColumns = @JoinColumn(name = "usuario_id")
+              )
     private Usuario vendedor;
     @ManyToOne
     @JoinTable(
