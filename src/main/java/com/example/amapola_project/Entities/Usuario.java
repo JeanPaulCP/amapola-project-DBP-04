@@ -1,13 +1,11 @@
 package com.example.amapola_project.Entities;
-
 import java.util.HashSet;
 import java.util.Set;
-
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Usuario")
-public class Usuario {
+public class Usuario{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,7 +22,7 @@ public class Usuario {
     @OneToOne
     private CarritoCompra carroUser;
     @OneToMany
-    private Set<Producto> productosVendidos;
+    private Set<Producto> productosPorVender;
 
     // Constructores, getters, y setters
     public Usuario(){}
@@ -41,7 +39,7 @@ public class Usuario {
                    String fotoUrl,
                    String telefonoNro,
                    CarritoCompra carroUser,
-                   Set<Producto> productosVendidos) {
+                   Set<Producto> productosPorVender) {
         this.id = id;
         this.dni = dni;
         this.nombre = nombre;
@@ -54,7 +52,7 @@ public class Usuario {
         this.fotoUrl = fotoUrl;
         this.telefonoNro = telefonoNro;
         this.carroUser = carroUser;
-        this.productosVendidos = productosVendidos;
+        this.productosPorVender=productosPorVender;
     }
 
     // Getters
@@ -106,8 +104,8 @@ public class Usuario {
         return carroUser;
     }
 
-    public Set<Producto> getProductosVendidos() {
-        return productosVendidos;
+    public Set<Producto> getProductosPorVender() {
+        return productosPorVender;
     }
 
     // Setters
@@ -158,7 +156,7 @@ public class Usuario {
     public void setCarroUser(CarritoCompra carroUser) {
         this.carroUser = carroUser;
     }
-    public void setProductosVendidos(Set<Producto> productosVendidos) {
-        this.productosVendidos = productosVendidos;
+    public void setProductosPorVender(Set<Producto> productosVendidos) {
+        this.productosPorVender = productosVendidos;
     }
 }

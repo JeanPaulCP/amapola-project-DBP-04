@@ -1,9 +1,7 @@
 package com.example.amapola_project.Entities;
-
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -17,32 +15,94 @@ public class Producto{
     private String descripcion;
     private String fotoUrl;
     private double precio;
-    private String condicion;
-    private String categoria;
-    private String ubicacion;
     private Date fechaPublicacion;
-    private String nombreVendedor;
-
+    @ManyToOne
+    private Usuario vendedor;
+    @ManyToOne
+    private CarritoCompra carroCompra;
+    private Boolean disponible;
     // Constructores
     public Producto(){}
-
-    public Producto(String nombre,
+    public Producto(Long id,
+                    String nombre,
                     String descripcion,
                     String fotoUrl,
                     double precio,
-                    String condicion,
-                    String categoria,
-                    String ubicacion,
                     Date fechaPublicacion,
-                    String nombreVendedor){
+                    Usuario vendedor,
+                    CarritoCompra carroCompra,
+                    Boolean disponible){
+        this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fotoUrl = fotoUrl;
         this.precio = precio;
-        this.condicion = condicion;
-        this.categoria = categoria;
-        this.ubicacion = ubicacion;
         this.fechaPublicacion = fechaPublicacion;
-        this.nombreVendedor = nombreVendedor;
+        this.vendedor = vendedor;
+        this.carroCompra = carroCompra;
+        this.disponible = disponible;
+    }
+    // Getters
+    public Long getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public String getFotoUrl() {
+        return fotoUrl;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public Date getFechaPublicacion() {
+        return fechaPublicacion;
+    }
+
+    public Usuario getVendedor() {
+        return vendedor;
+    }
+
+    public CarritoCompra getCarroCompra() {
+        return carroCompra;
+    }
+    public Boolean getDisponible() {
+        return disponible;
+    }
+    // Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    public void setFotoUrl(String fotoUrl) {
+        this.fotoUrl = fotoUrl;
+    }
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+    public void setFechaPublicacion(Date fechaPublicacion) {
+        this.fechaPublicacion = fechaPublicacion;
+    }
+    public void setVendedor(Usuario vendedor) {
+        this.vendedor = vendedor;
+    }
+    public void setCarroCompra(CarritoCompra carroCompra) {
+        this.carroCompra = carroCompra;
+    }
+    public void setDisponible(Boolean disponible) {
+        this.disponible = disponible;
     }
 }
