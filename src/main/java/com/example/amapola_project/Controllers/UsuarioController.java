@@ -1,47 +1,50 @@
 package com.example.amapola_project.Controllers;
 
+import com.example.amapola_project.Entities.CarritoCompra;
 import com.example.amapola_project.Entities.Usuario;
 import com.example.amapola_project.Services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import com.example.amapola_project.Entities.Producto;
+import java.util.Set;
+
+/**
+
+ Endpoints:
+
+ /users/{id_u} -> Se obtiene el perfil del usuario
+ /products/ -> Se obtienen todos los productos disponibles
+ /products/{id_p} -> Se obtiene un producto específico
+ /users/products/{id_u}/purchased -> Se obtienen todos los productos comprados por el usuario
+ /users/products/{id_u}/sold -> Se obtienen todos las ventas pendientes del usuario
+
+ */
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/users")
 public class UsuarioController {
-    private final UsuarioService usuarioService;
 
     @Autowired
-    public UsuarioController(UsuarioService usuarioService) {
-        this.usuarioService = usuarioService;
+    private UsuarioService usuarioService;
+
+    @GetMapping("/{id}") // Se obtiene el perfil del usuario
+    public Usuario getUsuario(@PathVariable Long id) {
+        return usuarioService.getUsuarioById(id);
     }
 
-    @GetMapping
-    public List<Usuario> getAllUsuarios() {
-        return usuarioService.findAllUsuarios();
+    @GetMapping("/products/{id}/purchased") // Se obtienen todos los productos comprados por el usuario
+    public Set<CarritoCompra> getComprasUsuario(@PathVariable Long id) {
+        return usuarioService.getCarritosByUsuario(id);
     }
 
-    @GetMapping("/{id}")
-    public Optional<Usuario> getUsuarioById(@PathVariable Long id) {
-        return usuarioService.findUsuarioById(id);
+    @GetMapping("/products/{id}/sold") // Se obtienen todos las ventas pendientes del usuario
+    public Set<Producto> getVentasPendientesPorUsuario(@PathVariable Long id) {
+        return usuarioService.getVentasPendientes(id);
     }
 
-    @PostMapping
+    @GetMapping("/create")
     public Usuario createUsuario(@RequestBody Usuario usuario) {
-        return usuarioService.saveUsuario(usuario);
+        return usuarioService.createUsuario(usuario);
     }
-
-    @PutMapping("/{id}")
-    public Usuario updateUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
-        return usuarioService.saveUsuario(usuario);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteUsuario(@PathVariable Long id) {
-        usuarioService.deleteUsuario(id);
-    }
-
-    // Puedes agregar más métodos según tus necesidades
 }

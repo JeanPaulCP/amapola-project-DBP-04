@@ -1,37 +1,37 @@
 package com.example.amapola_project.Services;
 
+import com.example.amapola_project.Entities.CarritoCompra;
 import com.example.amapola_project.Entities.Usuario;
 import com.example.amapola_project.Repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import com.example.amapola_project.Repositories.ProductoRepository;
+import com.example.amapola_project.Entities.Producto;
+
+import java.util.Objects;
+import java.util.Set;
 
 @Service
 public class UsuarioService {
-    private final UsuarioRepository usuarioRepository;
 
     @Autowired
-    public UsuarioService(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
+    private UsuarioRepository usuarioRepository;
+
+    public Usuario getUsuarioById(Long id) {
+        return usuarioRepository.findById(id).orElse(null);
     }
 
-    public List<Usuario> findAllUsuarios() {
-        return usuarioRepository.findAll();
+    public Set<CarritoCompra> getCarritosByUsuario(Long id){
+        return Objects.requireNonNull(usuarioRepository.findById(id).orElse(null)).getCarritos();
     }
 
-    public Optional<Usuario> findUsuarioById(Long id) {
-        return usuarioRepository.findById(id);
+    public Set<Producto> getVentasPendientes(Long id){
+        return Objects.requireNonNull(usuarioRepository.findById(id).orElse(null)).getProductosPorVender();
     }
 
-    public Usuario saveUsuario(Usuario usuario) {
+    // Función para crear a un nuevo usuario
+    public Usuario createUsuario(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
-
-    public void deleteUsuario(Long id) {
-        usuarioRepository.deleteById(id);
-    }
-
-    // Puedes agregar métodos adicionales según tus necesidades
 }

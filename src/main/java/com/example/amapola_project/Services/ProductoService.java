@@ -6,32 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductoService {
-    private final ProductoRepository productoRepository;
 
     @Autowired
-    public ProductoService(ProductoRepository productoRepository) {
-        this.productoRepository = productoRepository;
+    private ProductoRepository productoRepository;
+
+    public List<Producto> getAllProductosDisponibles() {
+        // Implementa la lógica para obtener todos los productos disponibles
+        // Por ejemplo, puedes buscar en la base de datos los productos que están marcados como disponibles.
+        return productoRepository.findAllByDisponible(true);
     }
 
-    public List<Producto> findAllProductos() {
-        return productoRepository.findAll();
+    public Producto getProductoById(Long id) {
+        return productoRepository.findById(id).orElse(null);
     }
-
-    public Optional<Producto> findProductoById(Long id) {
-        return productoRepository.findById(id);
-    }
-
-    public Producto saveProducto(Producto producto) {
-        return productoRepository.save(producto);
-    }
-
-    public void deleteProducto(Long id) {
-        productoRepository.deleteById(id);
-    }
-
-    // Puedes agregar métodos adicionales según tus necesidades
 }

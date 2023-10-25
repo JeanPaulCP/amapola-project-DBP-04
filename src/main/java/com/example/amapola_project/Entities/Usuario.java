@@ -1,5 +1,4 @@
 package com.example.amapola_project.Entities;
-import java.util.HashSet;
 import java.util.Set;
 import jakarta.persistence.*;
 
