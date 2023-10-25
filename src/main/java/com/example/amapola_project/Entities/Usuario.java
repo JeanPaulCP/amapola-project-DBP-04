@@ -153,10 +153,10 @@ public class Usuario{
         this.telefonoNro = telefonoNro;
     }
 
-    public void setCarroUser(Set<CarritoCompra> carritos) {
+    public void setCarritos(Set<CarritoCompra> carritos) {
         this.carritos = carritos;
     }
-    public void setProductosPorVender(Set<Producto> productosVendidos) {
-        this.productosPorVender = productosVendidos;
+    public void setProductosPorVender(Set<Producto> productosPorVender) {
+        this.productosPorVender = productosPorVender;
     }
 }
