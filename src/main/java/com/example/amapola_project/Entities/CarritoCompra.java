@@ -8,28 +8,44 @@ import java.util.Set;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "carritoCompra")
+@Table(name = "CarritoCompra")
 public class CarritoCompra {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+    @OneToOne
     private Usuario comprador;
-    @ManyToMany
+    @OneToMany
     private Set<Producto> productos;
-    private int cantidad;
-    private double precioTotal;
 
     // Constructores
     public CarritoCompra() {
     }
-    public CarritoCompra(Usuario comprador,
-                         Set<Producto> productos,
-                         int cantidad,
-                         double precioTotal){
+    public CarritoCompra(Long id,
+                         Usuario comprador,
+                         Set<Producto> productos) {
+        this.id = id;
         this.comprador = comprador;
         this.productos = productos;
-        this.cantidad = cantidad;
-        this.precioTotal = precioTotal;
+    }
+    // Getters
+    public Long getId() {
+        return id;
+    }
+    public Usuario getComprador() {
+        return comprador;
+    }
+    public Set<Producto> getProductos() {
+        return productos;
+    }
+    // Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public void setComprador(Usuario comprador) {
+        this.comprador = comprador;
+    }
+    public void setProductos(Set<Producto> productos) {
+        this.productos = productos;
     }
 }
