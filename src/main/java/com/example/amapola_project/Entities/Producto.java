@@ -23,10 +23,6 @@ public class Producto{
     private Date fechaPublicacion;
     private String nombreVendedor;
 
-//    @ManyToOne
-//    @JoinColumn(name = "usuario_id")
-//    private Usuario usuario;
-
     // Constructores
     public Producto(){}
 
