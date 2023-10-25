@@ -17,10 +17,19 @@ public class Producto{
     private double precio;
     private Date fechaPublicacion;
     @ManyToOne
+    @JoinTable(
+            name = "usuarioVentaProducto",
+            joinColumns = @JoinColumn(name = "producto_id"),
+            inverseJoinColumns = @JoinColumn(name = "usuario_id"))
     private Usuario vendedor;
     @ManyToOne
+    @JoinTable(
+            name = "carro_producto",
+            joinColumns = @JoinColumn(name = "producto_id"),
+            inverseJoinColumns = @JoinColumn(name = "carro_id")
+              )
     private CarritoCompra carroCompra;
-    private Boolean disponible;
+    private Boolean disponible; // Avisa si esta disponible para la venta o ya no
     // Constructores
     public Producto(){}
     public Producto(Long id,

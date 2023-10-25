@@ -19,8 +19,8 @@ public class Usuario{
     private String distrito;
     private String fotoUrl;
     private String telefonoNro;
-    @OneToOne
-    private CarritoCompra carroUser;
+    @OneToMany
+    private Set<CarritoCompra> carritos;
     @OneToMany
     private Set<Producto> productosPorVender;
 
@@ -38,7 +38,7 @@ public class Usuario{
                    String distrito,
                    String fotoUrl,
                    String telefonoNro,
-                   CarritoCompra carroUser,
+                   Set<CarritoCompra> carritos,
                    Set<Producto> productosPorVender) {
         this.id = id;
         this.dni = dni;
@@ -51,7 +51,7 @@ public class Usuario{
         this.distrito = distrito;
         this.fotoUrl = fotoUrl;
         this.telefonoNro = telefonoNro;
-        this.carroUser = carroUser;
+        this.carritos = carritos;
         this.productosPorVender=productosPorVender;
     }
 
@@ -100,8 +100,8 @@ public class Usuario{
         return telefonoNro;
     }
 
-    public CarritoCompra getCarroUser() {
-        return carroUser;
+    public Set<CarritoCompra> getCarritos() {
+        return carritos;
     }
 
     public Set<Producto> getProductosPorVender() {
@@ -153,8 +153,8 @@ public class Usuario{
         this.telefonoNro = telefonoNro;
     }
 
-    public void setCarroUser(CarritoCompra carroUser) {
-        this.carroUser = carroUser;
+    public void setCarroUser(Set<CarritoCompra> carritos) {
+        this.carritos = carritos;
     }
     public void setProductosPorVender(Set<Producto> productosVendidos) {
         this.productosPorVender = productosVendidos;

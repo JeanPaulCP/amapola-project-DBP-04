@@ -13,7 +13,11 @@ public class CarritoCompra {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
+    @ManyToOne
+    @JoinTable(
+            name = "ComprasRealizadas",
+            joinColumns = @JoinColumn(name = "carro_id"),
+            inverseJoinColumns = @JoinColumn(name = "usuario_id"))
     private Usuario comprador;
     @OneToMany
     private Set<Producto> productos;
