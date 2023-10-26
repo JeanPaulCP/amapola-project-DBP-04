@@ -1,6 +1,7 @@
 package com.example.amapola_project.Services;
 
 import com.example.amapola_project.Entities.CarritoCompra;
+import com.example.amapola_project.Entities.Usuario;
 import com.example.amapola_project.Repositories.CarritoCompraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,9 @@ public class CarritoCompraService {
 
     @Autowired
     private CarritoCompraRepository carritoCompraRepository;
+    public Iterable<CarritoCompra> getAllUsuarios() {
+        return carritoCompraRepository.findAll();
+    }
     @Autowired
     private ProductoRepository productoRepository;
 

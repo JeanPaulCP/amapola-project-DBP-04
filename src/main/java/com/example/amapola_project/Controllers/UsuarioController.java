@@ -27,7 +27,10 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
-
+    @GetMapping("/") // Se obtienen todos los usuarios
+    public Iterable<Usuario> getAllUsuarios() {
+        return usuarioService.getAllUsuarios();
+    }
     @GetMapping("/{id}") // Se obtiene el perfil del usuario
     public Usuario getUsuario(@PathVariable Long id) {
         return usuarioService.getUsuarioById(id);

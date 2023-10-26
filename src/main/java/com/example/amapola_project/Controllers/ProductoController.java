@@ -1,6 +1,7 @@
 package com.example.amapola_project.Controllers;
 
 import com.example.amapola_project.Entities.Producto;
+import com.example.amapola_project.Entities.Usuario;
 import com.example.amapola_project.Services.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,11 @@ public class ProductoController {
 
     @Autowired
     private ProductoService productoService;
-    @GetMapping("/") // Se obtienen todos los productos disponibles
+    @GetMapping("/") // Se obtienen todos los usuarios
+    public Iterable<Producto> getAllProductos() {
+        return productoService.getAllProducto();
+    }
+    @GetMapping("/availables") // Se obtienen todos los productos disponibles
     public List<Producto> getAllProductosDisponibles() {
         return productoService.getAllProductosDisponibles();
     }

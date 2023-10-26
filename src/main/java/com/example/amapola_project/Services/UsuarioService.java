@@ -17,6 +17,9 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    public Iterable<Usuario> getAllUsuarios() {
+        return usuarioRepository.findAll();
+    }
     public Usuario getUsuarioById(Long id) {
         return usuarioRepository.findById(id).orElse(null);
     }

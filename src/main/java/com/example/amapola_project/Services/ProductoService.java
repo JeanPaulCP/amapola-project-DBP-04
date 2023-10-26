@@ -1,6 +1,7 @@
 package com.example.amapola_project.Services;
 
 import com.example.amapola_project.Entities.Producto;
+import com.example.amapola_project.Entities.Usuario;
 import com.example.amapola_project.Repositories.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,10 @@ public class ProductoService {
 
     @Autowired // Inyecta el repositorio para poder utilizarlo
     private ProductoRepository productoRepository;
+
+    public Iterable<Producto> getAllProducto() {
+        return productoRepository.findAll();
+    }
     public List<Producto> getAllProductosDisponibles() {
         return productoRepository.findAllByDisponible(true);
     }
