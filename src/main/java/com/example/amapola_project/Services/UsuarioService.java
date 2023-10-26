@@ -6,7 +6,6 @@ import com.example.amapola_project.Repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.amapola_project.Repositories.ProductoRepository;
 import com.example.amapola_project.Entities.Producto;
 
 import java.util.Objects;
@@ -31,7 +30,7 @@ public class UsuarioService {
     }
 
     // Función para crear a un nuevo usuario
-    public Usuario createUsuario(Usuario usuario) {
-        return usuarioRepository.save(usuario);
+    public void createUsuario(Usuario usuario) {
+        usuarioRepository.save(usuario);
     }
 }

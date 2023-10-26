@@ -34,8 +34,9 @@ public class ProductoController {
         return productoService.getProductoById(id);
     }
     @PostMapping("/") // Se crea un producto
-    public Producto createProducto(@RequestBody Producto producto) {
-        return productoService.createProducto(producto);
+    public String createProducto(@RequestBody Producto producto) {
+        productoService.createProducto(producto);
+        return "Producto creado";
     }
 
 }

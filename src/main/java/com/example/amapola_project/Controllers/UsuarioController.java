@@ -16,7 +16,7 @@ import java.util.Set;
  /users/{id_u} -> Se obtiene el perfil del usuario
  /products/ -> Se obtienen todos los productos disponibles
  /products/{id_p} -> Se obtiene un producto específico
- /users/products/{id_u}/purchased -> Se obtienen todos los productos comprados por el usuario
+ /users/products/{id_u}/purchased -> Se obtienen todas las compras realizadas (carritos) por el usuario
  /users/products/{id_u}/sold -> Se obtienen todos las ventas pendientes del usuario
 
  */
@@ -33,7 +33,7 @@ public class UsuarioController {
         return usuarioService.getUsuarioById(id);
     }
 
-    @GetMapping("/products/{id}/purchased") // Se obtienen todos los productos comprados por el usuario
+    @GetMapping("/products/{id}/purchased") // Se obtienen todos las compras realizadas por el usuario
     public Set<CarritoCompra> getComprasUsuario(@PathVariable Long id) {
         return usuarioService.getCarritosByUsuario(id);
     }
@@ -44,7 +44,8 @@ public class UsuarioController {
     }
 
     @GetMapping("/create")
-    public Usuario createUsuario(@RequestBody Usuario usuario) {
-        return usuarioService.createUsuario(usuario);
+    public String createUsuario(@RequestBody Usuario usuario) {
+        usuarioService.createUsuario(usuario);
+        return "Usuario creado";
     }
 }

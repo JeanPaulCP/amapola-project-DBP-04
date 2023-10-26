@@ -18,8 +18,8 @@ public class ProductoService {
     public Producto getProductoById(Long id) {
         return productoRepository.findById(id).orElse(null);
     }
-    public Producto createProducto(Producto producto) {
-        return productoRepository.save(producto);
+    public void createProducto(Producto producto) {
+        productoRepository.save(producto);
     }
 
 }

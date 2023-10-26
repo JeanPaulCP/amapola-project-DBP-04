@@ -9,6 +9,5 @@ import com.example.amapola_project.Entities.Producto;
 
 @Repository
 public interface CarritoCompraRepository extends JpaRepository<CarritoCompra, Long> {
-    // Puedes agregar consultas personalizadas aquí si es necesario
-    List<Producto> findByCarroCompraId(Long id);
+
 }
