@@ -43,7 +43,7 @@ public class UsuarioController {
         return usuarioService.getVentasPendientes(id);
     }
 
-    @GetMapping("/create")
+    @PostMapping("/")
     public String createUsuario(@RequestBody Usuario usuario) {
         usuarioService.createUsuario(usuario);
         return "Usuario creado";
