@@ -7,20 +7,35 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+
+ Endpoints:
+
+ /users/{id_u} -> Se obtiene el perfil del usuario
+ /products/ -> Se obtienen todos los productos disponibles
+ /products/{id_p} -> Se obtiene un producto específico
+ /users/products/{id_u}/purchased -> Se obtienen todos los productos comprados por el usuario
+ /users/products/{id_u}/sold -> Se obtienen todos las ventas pendientes del usuario
+
+ */
+
 @RestController
 @RequestMapping("/products")
 public class ProductoController {
 
     @Autowired
     private ProductoService productoService;
-
-    @GetMapping("/")
+    @GetMapping("/") // Se obtienen todos los productos disponibles
     public List<Producto> getAllProductosDisponibles() {
         return productoService.getAllProductosDisponibles();
     }
-
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") // Se obtiene un producto específico
     public Producto getProducto(@PathVariable Long id) {
         return productoService.getProductoById(id);
     }
+    @PostMapping("/") // Se crea un producto
+    public Producto createProducto(@RequestBody Producto producto) {
+        return productoService.createProducto(producto);
+    }
+
 }

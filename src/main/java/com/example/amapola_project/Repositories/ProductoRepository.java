@@ -10,7 +10,9 @@ import java.util.List;
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
     // Puedes agregar consultas personalizadas aquí si es necesario
     List<Producto> findByVendedorId(Long id);
-    List<Producto> findAllByDisponible(boolean disponible);
+    List<Producto> findAllByDisponible(boolean disponible); // Esta es una función que se genera automáticamente
+    // porque se llama findAllBy{Nombre del atributo}. Lo que hace esta función es buscar todos los productos
+    // que tengan el atributo disponible en true.
 
     List<Producto> findByCarroCompraId(Long id);
 }
