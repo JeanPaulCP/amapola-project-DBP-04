@@ -1,12 +1,16 @@
 package com.example.amapola_project.Entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Set;
-import jakarta.persistence.*;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Usuario")
 public class Usuario{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id", nullable = false)
     private Long id;
     private Long dni;
     private String nombre;
@@ -19,8 +23,10 @@ public class Usuario{
     private String fotoUrl;
     private String telefonoNro;
     @OneToMany
+    @JsonIgnore // Para evitar que se cree un loop infinito
     private Set<CarritoCompra> carritos;
     @OneToMany
+    @JsonIgnore // Cuando se haga un post de usuario, no será necesario que se envíen los productos que vende
     private Set<Producto> productosPorVender;
 
     // Constructores, getters, y setters

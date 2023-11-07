@@ -1,22 +1,24 @@
 package com.example.amapola_project.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Set;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "CarritoCompra")
 public class CarritoCompra {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cart_id", nullable = false)
     private Long id;
     @ManyToOne
-    @JoinTable(
-            name = "ComprasRealizadas",
-            joinColumns = @JoinColumn(name = "carro_id"),
-            inverseJoinColumns = @JoinColumn(name = "usuario_id"))
+    @JoinColumn(name = "buyer_id")
     private Usuario comprador;
     @OneToMany
+    @JsonIgnore
     private Set<Producto> productos;
 
     // Constructores

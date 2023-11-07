@@ -4,22 +4,14 @@ import com.example.amapola_project.Entities.CarritoCompra;
 import com.example.amapola_project.Entities.Usuario;
 import com.example.amapola_project.Services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.amapola_project.Entities.Producto;
+
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
-
-/**
-
- Endpoints:
-
- /users/{id_u} -> Se obtiene el perfil del usuario
- /products/ -> Se obtienen todos los productos disponibles
- /products/{id_p} -> Se obtiene un producto específico
- /users/products/{id_u}/purchased -> Se obtienen todas las compras realizadas (carritos) por el usuario
- /users/products/{id_u}/sold -> Se obtienen todos las ventas pendientes del usuario
-
- */
 
 @RestController
 @RequestMapping("/users")
@@ -28,20 +20,23 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
     @GetMapping("/") // Se obtienen todos los usuarios
-    public Iterable<Usuario> getAllUsuarios() {
+    public List<Usuario> getAllUsuarios()
+    {
         return usuarioService.getAllUsuarios();
     }
     @GetMapping("/{id}") // Se obtiene el perfil del usuario
-    public Usuario getUsuario(@PathVariable Long id) {
-        return usuarioService.getUsuarioById(id);
-    }
+    public ResponseEntity<Usuario> getUsuario(@PathVariable Long id)
+    {
+        Optional<Usuario> usuarioOptional = usuarioService.getUsuarioById(id);
 
+        return usuarioOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
     @GetMapping("/products/{id}/purchased") // Se obtienen todos las compras realizadas por el usuario
     public Set<CarritoCompra> getComprasUsuario(@PathVariable Long id) {
         return usuarioService.getCarritosByUsuario(id);
     }
 
-    @GetMapping("/products/{id}/sold") // Se obtienen todos las ventas pendientes del usuario
+    @GetMapping("/products/{id}/sale") // Se obtienen todos las ventas pendientes del usuario
     public Set<Producto> getVentasPendientesPorUsuario(@PathVariable Long id) {
         return usuarioService.getVentasPendientes(id);
     }

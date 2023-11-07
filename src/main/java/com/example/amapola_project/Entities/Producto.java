@@ -1,8 +1,8 @@
 package com.example.amapola_project.Entities;
+
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import jakarta.persistence.*;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Producto")
@@ -10,6 +10,7 @@ public class Producto{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_id", nullable = false)
     private Long id;
     private String nombre;
     private String descripcion;
@@ -17,18 +18,10 @@ public class Producto{
     private double precio;
     private Date fechaPublicacion;
     @ManyToOne
-    @JoinTable(
-            name = "usuarioVentaProducto",
-            joinColumns = @JoinColumn(name = "producto_id"),
-            inverseJoinColumns = @JoinColumn(name = "usuario_id")
-              )
+    @JoinColumn(name = "seller_id")
     private Usuario vendedor;
     @ManyToOne
-    @JoinTable(
-            name = "carro_producto",
-            joinColumns = @JoinColumn(name = "producto_id"),
-            inverseJoinColumns = @JoinColumn(name = "carro_id")
-              )
+    @JoinColumn(name = "cart_id")
     private CarritoCompra carroCompra;
     private Boolean disponible; // Avisa si esta disponible para la venta o ya no
     // Constructores

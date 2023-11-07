@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.example.amapola_project.Entities.Producto;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -17,14 +19,17 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public Iterable<Usuario> getAllUsuarios() {
+    public List<Usuario> getAllUsuarios()
+    {
         return usuarioRepository.findAll();
     }
-    public Usuario getUsuarioById(Long id) {
-        return usuarioRepository.findById(id).orElse(null);
+    public Optional<Usuario> getUsuarioById(Long id)
+    {
+        return usuarioRepository.findById(id);
     }
 
-    public Set<CarritoCompra> getCarritosByUsuario(Long id){
+    public Set<CarritoCompra> getCarritosByUsuario(Long id)
+    {
         return Objects.requireNonNull(usuarioRepository.findById(id).orElse(null)).getCarritos();
     }
 
@@ -33,7 +38,8 @@ public class UsuarioService {
     }
 
     // Función para crear a un nuevo usuario
-    public void createUsuario(Usuario usuario) {
+    public void createUsuario(Usuario usuario)
+    {
         usuarioRepository.save(usuario);
     }
 }
